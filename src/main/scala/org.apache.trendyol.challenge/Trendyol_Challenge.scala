@@ -66,7 +66,7 @@ object Trendyol_Challenge {
     //result 3
     val result3 = tableEnv.sqlQuery("select userID from Challenge_Csv group by userID having count(distinct eventName)=4 order by 1 desc limit 5")
 
-    result3.toDataSet[Row].writeAsText("/result/result3.txt").setParallelism(1)
+    result3.toDataSet[Row].writeAsText("/result/result3.txt",writeMode = WriteMode.OVERWRITE).setParallelism(1)
 
     //result 4
     val result4 = tableEnv.sqlQuery("select eventName,count(1) from Challenge_Csv where userID='47' group by  eventName")
